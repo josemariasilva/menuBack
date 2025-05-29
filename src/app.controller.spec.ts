@@ -15,8 +15,21 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+    it('should return "Maracuja de limão"', () => {
+      expect(appController.getHello()).toBe('Maracuja de limão');
     });
+
+    it('shoudl return sum of parameter', ()=>{
+      expect(appController.postSum({one:1, two:1})).toBe(2);
+    });
+
+    it('shoudl return difference of parameter', ()=>{
+      expect(appController.postDiff({one:1, two:1})).toBe(0);
+    });
+
+    it('shoudl return sum of all parameters', ()=>{
+      expect(appController.postMultSum({arr:[1,2,3,4]})).toBe("10");
+    });
+
   });
 });
