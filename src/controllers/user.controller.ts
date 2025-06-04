@@ -1,9 +1,7 @@
-import { Body, Controller, Get, Post, Req } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { UserService } from 'src/services/user.service';
 
-
-
-@Controller("users")
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -11,5 +9,4 @@ export class UserController {
   getUsers(): any {
     return this.userService.findAll();
   }
-
 }

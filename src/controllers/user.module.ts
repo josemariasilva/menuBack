@@ -4,7 +4,6 @@ import { UserService } from 'src/services/user.service';
 import { userProviders } from 'src/entities/user/user.provider';
 import { DatabaseModule } from 'src/infra/database/database.module';
 
-
 @Module({
   imports: [DatabaseModule],
   controllers: [UserController],
