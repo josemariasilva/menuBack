@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from 'src/shared/entities/user/user.entity';
+import { httpResponseInterface } from 'src/shared/protocols/interfaces/httpResponse.interface';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -14,7 +15,20 @@ export class UserService {
     return this.userRepository.find();
   }
 
-  async putUser(user_: UserEntity): Promise<any> {
-    return this.userRepository.save(user_);
+  async createUser(user: UserEntity): Promise<httpResponseInterface> {
+    const isFoundedUser = await this.userRepository.findOneBy({
+      email: user.email,
+    });
+
+    if (isFoundedUser) {
+      return {
+        statusCode: HttpStatus.FOUND,
+        response: { result: 'user already exist' },
+      };
+    }
+
+    const response = await this.userRepository.save(user);
+
+    return { statusCode: HttpStatus.CREATED, response };
   }
 }
