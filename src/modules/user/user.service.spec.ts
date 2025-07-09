@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserService } from './user.service';
 import { UserEntity } from '../../shared/entities/user/user.entity';
+import { getRepositoryToken } from '@nestjs/typeorm';
 
 describe('userService', () => {
   let userService: UserService;
@@ -10,7 +11,7 @@ describe('userService', () => {
       providers: [
         UserService,
         {
-          provide: UserEntity,
+          provide: getRepositoryToken(UserEntity),
           useValue: {
             find: jest.fn(() =>
               Promise.resolve([
