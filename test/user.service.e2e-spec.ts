@@ -2,11 +2,14 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { App } from 'supertest/types';
-import { AppModule } from './../src/app.module';
+import { AppModule } from '../src/app.module';
+import { UserController } from 'src/modules/user/user.controller';
+import { UserService } from 'src/modules/user/user.service';
+import { UserEntity } from 'src/shared/entities/user/user.entity';
+import { Repository } from 'typeorm';
 
 describe('UserService', () => {
   let app: INestApplication<App>;
-
   let userService: UserService;
   let userController: UserController;
   let userRepository: Partial<Repository<UserEntity>>;
@@ -35,4 +38,3 @@ describe('UserService', () => {
     return request(app.getHttpServer()).post('/users').expect(302);
   });
 });
-
