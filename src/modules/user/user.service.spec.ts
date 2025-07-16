@@ -41,7 +41,7 @@ describe('userService', () => {
     expect(userService).toBeDefined();
   });
 
-  it('should return user', async () => {
+  it('should return users', async () => {
     const users = await userService.findAll();
 
     expect(users).toEqual([
