@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../../shared/entities/user/user.entity';
 import { httpResponseInterface } from 'src/shared/protocols/interfaces/httpResponse.interface';
 import { Repository } from 'typeorm';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UserService {
@@ -27,6 +28,7 @@ export class UserService {
       };
     }
 
+    user.password = await bcrypt.hash(user.password, 7);
     const response = await this.userRepository.save(user);
 
     return { statusCode: HttpStatus.CREATED, response };
