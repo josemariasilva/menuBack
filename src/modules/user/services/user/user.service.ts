@@ -1,6 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from '../../shared/entities/user/user.entity';
+import { UserEntity } from '../../../../shared/entities/user/user.entity';
 import { httpResponseInterface } from 'src/shared/protocols/interfaces/httpResponse.interface';
 import { Repository } from 'typeorm';
 
@@ -15,10 +15,15 @@ export class UserService {
     return this.userRepository.find();
   }
 
-  async createUser(user: UserEntity): Promise<httpResponseInterface> {
-    const isFoundedUser = await this.userRepository.findOneBy({
-      email: user.email,
+  async findByEmail(email_user: string): Promise<UserEntity> {
+    const userEmail: UserEntity = await this.userRepository.findOneByOrFail({
+      email: email_user,
     });
+    return userEmail;
+  }
+
+  async createUser(user: UserEntity): Promise<httpResponseInterface> {
+    const isFoundedUser = await this.findByEmail(user.email);
 
     if (isFoundedUser) {
       return {

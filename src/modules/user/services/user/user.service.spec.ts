@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserService } from './user.service';
-import { UserEntity } from '../../shared/entities/user/user.entity';
+import { UserService } from '../../user.service';
+import { UserEntity } from '../../../../shared/entities/user/user.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { HttpStatus } from '@nestjs/common';
 import { Repository } from 'typeorm';

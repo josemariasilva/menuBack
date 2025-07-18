@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Res } from '@nestjs/common';
-import { UserService } from 'src/modules/user/user.service';
+import { UserService } from 'src/modules/user/services/user/user.service';
 import { UserEntity } from 'src/shared/entities/user/user.entity';
 import { Response } from 'express';
 
